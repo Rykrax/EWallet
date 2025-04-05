@@ -1,0 +1,138 @@
+@{
+    ViewData["Title"] = "Thông tin tài khoản";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" />
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:5289/get-user-info')
+                .then(response => response.json())
+                .then(userData => {
+                    if (!userData) return;
+                    userID = userData.userID;
+                    fetch("http://localhost:5289/api/users/" + userID)
+                        .then(response => response.json())
+                        .then(userDetail => {
+                            console.log(userDetail);
+                            document.querySelector('#title-name').innerText = userDetail.fullName || userDetail.email;
+                            document.getElementById('user-fullname').innerText = userDetail.fullName || '';
+                            document.getElementById('user-email').innerText = userDetail.email || '';
+                            document.getElementById('user-phone').innerText = userDetail.phoneNumber || '';
+                            document.getElementById('user-birthdate').innerText = formatDate(userDetail.birthDate) || '';
+                            document.getElementById('create-at').innerText = formatDate(userDetail.createdAt) || '';
+                            document.getElementById('user-cccd').innerText = userDetail.cccd || '';
+                        })
+                })            
+        });
+
+        let formatDate = (dateString) => {
+            const date = new Date(dateString);
+            if (isNaN(date)) return dateString;
+
+            const day = String(date.getDate()).padStart(2, '0');      
+            const month = String(date.getMonth() + 1).padStart(2, '0'); 
+            const year = date.getFullYear();
+
+            return `${day}/${month}/${year}`;
+        }
+    </script>
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/user/profile">Tài khoản</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Hồ sơ</li>
+                </ol>
+                <h1>Thông tin tài khoản</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="dashboard-menu">
+                    <li class="active">
+                        <a href="/user/profile">
+                            <i class="fa-regular fa-user"></i>
+                            Hồ sơ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa-regular fa-credit-card"></i>
+                            Nạp tiền / Chuyển tiền
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa-regular fa-bell"></i>
+                            Thông báo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/setting">
+                            <i class="fa-regular fa-gear"></i>
+                            Cài đặt
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="user-profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="user-card">
+                    <div class="user-infos">
+                        <div class="user-avatar">
+                            <img src="~/upload/avatar/rykrax.jpg" width="160" height="160" class="rounded-circle">
+                        </div>
+                        <div class="user">
+                            <h4 id="title-name"></h4>
+                            <p>Tham gia: <span id="create-at"></span></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="user-about">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            @* <h2>Thông tin tài khoản <span>Rykrax</span></h2>
+                            <p><span class="fw-bold">Họ và tên: </span>Phạm Tuấn Khang</p>
+                            <p><span class="fw-bold">Email: </span>khangsnd163@gmail.com</p>
+                            <p><span class="fw-bold">Số điện thoại: </span>0983404598</p>
+                            <p><span class="fw-bold">Ngày sinh: </span>16/03/2004</p>
+                            <p><span class="fw-bold">Căn cước công dân: </span>031204002335</p> *@
+
+                            <h2>Thông tin tài khoản</h2>
+                            <p><span class="fw-bold">Họ và tên: </span><span id="user-fullname"></span></p>
+                            <p><span class="fw-bold">Email: </span><span id="user-email"></span></p>
+                            <p><span class="fw-bold">Số điện thoại: </span><span id="user-phone"></span></p>
+                            <p><span class="fw-bold">Ngày sinh: </span><span id="user-birthdate"></span></p>
+                            <p><span class="fw-bold">Căn cước công dân: </span><span id="user-cccd"></span></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

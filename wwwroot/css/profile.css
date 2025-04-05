@@ -1,0 +1,81 @@
+.breadcrumb-area {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+}
+
+.breadcrumb-item {
+
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: black;
+}
+
+.dashboard-menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-menu li {
+    list-style: none;
+    margin-left: 30px;
+}
+
+.dashboard-menu li:first-child {
+    margin-left: 0;
+}
+
+.dashboard-menu li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    line-height: 60px;
+}
+
+.dashboard-menu li.active a{
+    color: #0674EC;
+}
+
+.dashboard-menu li:hover a {
+    color: #0674EC;
+}
+
+.user-profile {
+    background-color: #eff1f5;
+    padding: 30px 0;
+}
+
+.user-profile > .row {
+    display: flex;
+    align-items: stretch;
+}
+
+.user-card {
+    background-color: #fff;
+}
+
+.user-infos {
+    padding: 30px 0;
+}
+
+.user-avatar {
+    text-align: center;
+}
+
+.user {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.user-about {
+    background-color: #fff;
+    padding: 44px 30px;
+}
+
+.user-about h2 {
+    padding-bottom: 20px;
+}

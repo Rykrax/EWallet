@@ -1,0 +1,258 @@
+@{
+    ViewData["Title"] = "Cài đặt tài khoản";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth.css" />
+    <link rel="stylesheet" href="~/css/setting.css" />
+}
+
+@section Scripts {
+    @* <link rel="stylesheet" href="~/css/profile.css" /> *@
+    <script src="~/js/validator.js"></script>
+    <script src="~/js/user.js"></script>
+    <script>
+        Validator('#changepass-form', {
+            onSubmit: (data) => {
+                handleChangePassword(data);
+                @* console.log("xinchào ", data); *@
+                @* console.log("xinchào ",data); *@
+                    @* handleLogin(data); *@
+                },
+        });
+    </script>
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/user/profile">Tài khoản</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Cài đặt</li>
+                </ol>
+                <h1>Cài đặt tài khoản</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="dashboard-menu">
+                    <li>
+                        <a href="/user/profile">
+                            <i class="fa-regular fa-user"></i>
+                            Hồ sơ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa-regular fa-credit-card"></i>
+                            Nạp tiền / Chuyển tiền
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa-regular fa-bell"></i>
+                            Thông báo
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="">
+                            <i class="fa-regular fa-gear"></i>
+                            Cài đặt
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="information-change">
+                    <a class="toggle-title" href="#changeavatar-collapse" data-toggle="collapse">
+                        <h4>
+                            Tải lên ảnh đại diện
+                            <span class="fa-solid fa-chevron-down"></span>
+                        </h4>
+                    </a>
+                    <div class="collapse" id="changeavatar-collapse">
+                        <div class="card card-body">
+                            Some placeholder content for the collapse component. This panel is hidden by default but
+                            revealed when the user activates the relevant trigger.
+                        </div>
+                    </div>
+                </div>
+                <div class="information-change">
+                    <a class="toggle-title" href="#changepass-collapse" data-bs-toggle="collapse" aria-expanded="false">
+                        <h4>
+                            Đổi mật khẩu
+                            <span class="fa-solid fa-chevron-down"></span>
+                        </h4>
+                    </a>
+                    <div class="information-set collapse show" id="changepass-collapse">
+                        <div class="information-wrapper">
+                            <form method="post" action="" id="changepass-form">
+                                <div class="form-group mb-3">
+                                    <label for="oldpassword" class="form-label fw-bold">Mật khẩu cũ</label>
+                                    <input type="password" class="form-control" rules="required|min:6" id="oldpassword" name="oldpassword"
+                                        placeholder="Nhập mật khẩu cũ">
+                                    <div class="form-message"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label for="newpassword" class="form-label fw-bold">Mật khẩu mới</label>
+                                        <input type="password" class="form-control" rules="required|min:6|newPassword:[name='oldpassword']" id="newpassword" name="newpassword"
+                                            placeholder="Nhập mật khẩu mới">
+                                        <div class="form-message"></div>
+                                    </div>
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label for="renewpassword" class="form-label fw-bold">Nhập lại mật khẩu
+                                            mới</label>
+                                        <input type="password" class="form-control" rules="required|confirm:[name='newpassword']" id="renewpassword" name="renewpassword"
+                                            placeholder="Nhập lại mật khẩu mới">
+                                        <div class="form-message"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary">Lưu thay đổi</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="information-change" id="changecode">
+                    <a class="toggle-title" href="#changecode-collapse" data-bs-toggle="collapse" aria-expanded="false">
+                        <h4>
+                            Đổi mã pin
+                            <span class="fa-solid fa-chevron-down"></span>
+                        </h4>
+                    </a>
+                    <div class="information-set collapse" id="changecode-collapse">
+                        <div class="information-wrapper">
+                            <div class="mb-3">
+                                <label for="oldcode" class="form-label fw-bold">Mã pin cũ</label>
+                                <input type="password" class="form-control" id="oldcode" placeholder="Nhập mã pin cũ">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="newcode" class="form-label fw-bold">Mã pin mới</label>
+                                    <input type="password" class="form-control" id="newcode"
+                                        placeholder="Nhập mã pin mới">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="renewcode" class="form-label fw-bold">Nhập lại mã pin mới</label>
+                                    <input type="password" class="form-control" id="renewcode"
+                                        placeholder="Nhập lại mã pin mới">
+                                </div>
+                            </div>
+                            <div class="mb-3 text-end">
+                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @* <div class="information-change">
+                    <a class="toggle-title" href="#changeinfo-collapse" data-bs-toggle="collapse" aria-expanded="false">
+                        <h4>
+                            Sửa thông tin cá nhân
+                            <span class="fa-solid fa-chevron-down"></span>
+                        </h4>
+                    </a>
+                    <div class="information-set collapse show" id="changeinfo-collapse">
+                        <div class="information-wrapper">
+                            <div class="mb-3">
+                                <label for="name" class="form-label fw-bold">Họ và tên</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-bold">Email</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label fw-bold">Số điện thoại</label>
+                                <input type="text" class="form-control" id="phoneNumber">
+                            </div>
+                            <div class="mb-3">
+                                <label for="birthDay" class="form-label fw-bold">Ngày sinh</label>
+                                <input type="date" class="form-control" id="birthDay">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cccd" class="form-label fw-bold">Căn cước công dân</label>
+                                <input type="text" class="form-control" id="cccd">
+                            </div>
+                            <div class="mb-3 text-end">
+                                <button type="submit" class="btn btn-primary" id="editButton">Lưu thay đổi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> *@
+                <div class="information-change">
+                    <a class="toggle-title" href="#changeinfo-collapse" data-bs-toggle="collapse" aria-expanded="false">
+                        <h4>
+                            Sửa thông tin cá nhân
+                            <span class="fa-solid fa-chevron-down"></span>
+                        </h4>
+                    </a>
+                    <div class="information-set collapse show" id="changeinfo-collapse">
+                        <div class="information-wrapper">
+                            <div class="mb-3">
+                                <label for="name" class="form-label fw-bold">Họ và tên</label>
+                                <input type="text" class="form-control editable-field" id="name" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-bold">Email</label>
+                                <input type="email" class="form-control editable-field" id="email" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label fw-bold">Số điện thoại</label>
+                                <input type="text" class="form-control editable-field" id="phoneNumber" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="birthDay" class="form-label fw-bold">Ngày sinh</label>
+                                <input type="date" class="form-control editable-field" id="birthDay" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cccd" class="form-label fw-bold">Căn cước công dân</label>
+                                <input type="text" class="form-control editable-field" id="cccd" disabled>
+                            </div>
+                            <div class="mb-3 text-end">
+                                <button type="button" class="btn btn-primary" id="editButton">
+                                    <i class="fa-solid fa-pen"></i> Sửa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("editButton").addEventListener("click", function () {
+        let inputs = document.querySelectorAll(".editable-field");
+        let isDisabled = inputs[0].disabled; // Kiểm tra trạng thái hiện tại
+
+        // Đảo ngược trạng thái của các input
+        inputs.forEach(input => input.disabled = !isDisabled);
+
+        // Đổi nội dung của nút
+        this.innerHTML = isDisabled
+            ? '<i class="fa-solid fa-save"></i> Lưu thay đổi'
+            : '<i class="fa-solid fa-pen"></i> Sửa';
+    });
+</script>

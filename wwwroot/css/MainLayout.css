@@ -1,0 +1,62 @@
+.menu-area {
+    background-color: #EEF1F3;
+    padding: 3px 0;
+}
+
+.user-area {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.user-notification {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+}
+
+.user-notification i {
+    font-size: 20px;
+}
+
+.user-notification .icon_wrap {
+    position: relative;
+}
+
+.notification-count {
+    height: 20px;
+    font-size: 10px;
+    background-color: #28A745;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 500;
+    top: 2px;
+    position: absolute;
+    padding: 3px 5px;
+    right: 0;
+    min-width: 20px;
+    text-align: center;
+    transform: translate(50%, -50%);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    padding: 5px 0;
+}
+
+.user-info a {
+    text-decoration: none;
+    color: black;
+}
+
+.user-name {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}

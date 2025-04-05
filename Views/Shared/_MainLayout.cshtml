@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EWallet</title>
+    <script type="importmap"></script>
+    @* <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css"/> *@
+    <link rel="stylesheet" href="~/lib/fontawesome-pro/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/EWallet.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/MainLayout.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <div class="menu-area">
+            <div class="top-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-6"></div>
+                        <div class="col-lg-8 offset-lg-1 col-md-9 col-6">
+                            <div class="user-area">
+                                <div class="user-notification me-3">
+                                    <div class="icon_wrap">
+                                        <i class="fa-regular fa-bell"></i>
+                                        <span class="notification-count">3</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="user-info dropdown">
+                                    <a class="d-flex align-items-center dropdown-toggle" href="#"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <div class="user-avatar">
+                                            <img src="~/upload/avatar/rykrax.jpg" alt="Avatar" width="35" height="35"
+                                                class="rounded-circle">
+                                        </div>
+                                        <div class="user-name ms-2">
+                                            <span id="name-profile">Phạm Tuấn Khang</span>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="/user/profile">Hồ sơ</a></li>
+                                        <li><a class="dropdown-item" href="#">Nạp tiền</a></li>
+                                        <li><a class="dropdown-item" href="#">Chuyển tiền</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="/login">Đăng xuất</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    @* <div class="container">
+        <main role="main" class="pb-3">
+        </main>
+    </div> *@
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - EWallet - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Styles", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch("http://localhost:5289/get-user-info")
+                .then(response => response.json())
+                .then(userData => {
+                    console.log(userData);
+                    document.querySelector("#name-profile").innerHTML = userData.fullName;
+                });
+        });
+    </script>
+</body>
+
+</html>

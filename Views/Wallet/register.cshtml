@@ -1,0 +1,84 @@
+@{
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+    ViewData["Title"] = "Đăng Ký";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth.css" />
+}
+
+@section Scripts {
+    @* <script src="~/js/register.js"></script> *@
+    <script src="~/js/register.js"></script>
+    <script src="~/js/validator.js"></script>
+    <script>
+        Validator('#register-form', {
+            onSubmit: () => {
+                @* console.log("xinchào ",data); *@
+                handleRegister();
+            },
+        });
+    </script>
+}
+
+<div class="body-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div class="myform">
+                    <div class="logo mb-3">
+                        <div class="col-md-12 text-center">
+                            <h1>Đăng ký</h1>
+                        </div>
+                    </div>
+                    <div id="successAlert" class="alert alert-success alert-dismissible fade show d-none" role="alert"></div>
+                    <div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert"></div>
+                    <form method="post" action="" id="register-form">
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" rules="required|email" id="email" class="form-control" placeholder="VD: email@domain.com">
+                            <div class="form-message"></div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                                <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                                <input type="text" name="phoneNumber" rules="required|sdt" id="phoneNumber" class="form-control">
+                                <div class="form-message"></div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="cccd" class="form-label">Căn cước công dân</label>
+                            <input type="text" name="cccd" rules="required" id="cccd" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" name="password" rules="required|min:6" id="password" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label for="confirm" class="form-label">Nhập lại mật khẩu</label>
+                            <input type="password" name="confirm" rules="required|confirm:[name='password']" id="confirm" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-block mybtn btn-primary tx-tfm" id="register">Đăng ký</button>
+                            </div>
+                        </div>
+
+                        <div class="mt-1">
+                            <div class="form-group">
+                              <p class="text-center">Đã có tài khoản? <a href="/login" id="signup">Đăng nhập</a></p>
+                           </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
