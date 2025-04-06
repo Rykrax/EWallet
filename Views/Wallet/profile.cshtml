@@ -26,6 +26,7 @@
                             document.getElementById('user-birthdate').innerText = formatDate(userDetail.birthDate) || '';
                             document.getElementById('create-at').innerText = formatDate(userDetail.createdAt) || '';
                             document.getElementById('user-cccd').innerText = userDetail.cccd || '';
+                            document.getElementById('user-balance').innerText = (userDetail.balance || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) || '';
                         })
                 })            
         });
@@ -128,6 +129,7 @@
                             <p><span class="fw-bold">Số điện thoại: </span><span id="user-phone"></span></p>
                             <p><span class="fw-bold">Ngày sinh: </span><span id="user-birthdate"></span></p>
                             <p><span class="fw-bold">Căn cước công dân: </span><span id="user-cccd"></span></p>
+                            <p><span class="fw-bold">Số dư tài khoản: </span><span id="user-balance"></span></p>
 
                         </div>
                     </div>

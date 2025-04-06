@@ -38,13 +38,14 @@ namespace EWalletMVC.Controllers
         }
 
         // API: Thêm tài khoản ngân hàng mới
-        [HttpPost]
-        public async Task<ActionResult<BankAccount>> CreateBankAccount(BankAccount bankAccount)
-        {
-            _context.BankAccounts.Add(bankAccount);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetBankAccount), new { id = bankAccount.AccountID }, bankAccount);
-        }
+            [HttpPost]
+            public async Task<ActionResult<BankAccount>> CreateBankAccount(BankAccount bankAccount)
+            {
+                _context.BankAccounts.Add(bankAccount);
+                await _context.SaveChangesAsync();
+                return Ok(new { status = 200, message = "Thêm tài khoản ngân hàng thành công!" });
+                // return CreatedAtAction(nameof(GetBankAccount), new { id = bankAccount.AccountID }, bankAccount);
+            }
 
         // API: Cập nhật tài khoản ngân hàng
         [HttpPut("{id}")]

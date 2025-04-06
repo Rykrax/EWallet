@@ -47,7 +47,7 @@ let handleLogin = (data) => {
             // localStorage.setItem("currentUser", JSON.stringify(user.dataUser));
             clearInput();
             setTimeout(() => {
-                window.location.href = "/home";
+                window.location.href = "/user/profile";
             }, 1500);
         }
     });

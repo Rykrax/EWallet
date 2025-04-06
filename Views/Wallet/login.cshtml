@@ -10,8 +10,8 @@
 
 @section Scripts {
     @* <script src="~/js/register.js"></script> *@
-    <script src="~/js/login.js"></script>
-    <script src="~/js/validator.js"></script>
+    <script src="~/js/login.js" asp-append-version="true"></script>
+    <script src="~/js/validator.js" asp-append-version="true"></script>
     <script>
         Validator('#login-form', {
             onSubmit: (data) => {

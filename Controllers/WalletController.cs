@@ -31,11 +31,11 @@ public class WalletController : Controller
         return View();
     }
 
-    [HttpGet("/home")]
-    public IActionResult home()
-    {
-        return View();
-    }
+    // [HttpGet("/home")]
+    // public IActionResult home()
+    // {
+    //     return View();
+    // }
 
 
     [HttpGet("/user/profile")]

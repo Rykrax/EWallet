@@ -81,7 +81,7 @@ namespace EWalletMVC.Controllers
             return NoContent();
         }
 
-        // 🟢 API: Xóa người dùng
+        // API: Xóa người dùng
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

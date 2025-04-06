@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace EWalletMVC.Models
 {
@@ -8,6 +9,7 @@ namespace EWalletMVC.Models
     {
         [Key]
         [Column("iAccountID_PK")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AccountID { get; set; }  // Mã tài khoản ngân hàng (PK)
 
         [Required]
@@ -32,7 +34,9 @@ namespace EWalletMVC.Models
         public string Status { get; set; } = "active";  // Trạng thái (active/blocked)
 
         // Khai báo mối quan hệ với User và Bank
+        [JsonIgnore]
         public virtual User User { get; set; }
+        [JsonIgnore]
         public virtual Bank Bank { get; set; }
     }
 }

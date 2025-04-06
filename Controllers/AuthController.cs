@@ -14,28 +14,28 @@ public class AuthController : ControllerBase
         _context = context;
     }
 
-//     private string GenerateJwtToken(User user)
-// {
-//     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"));
-//     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+    //     private string GenerateJwtToken(User user)
+    // {
+    //     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"));
+    //     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-//     var claims = new[]
-//     {
-//         new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-//         new Claim(ClaimTypes.Email, user.Email),
-//         new Claim(ClaimTypes.Role, user.RoleID.ToString())
-//     };
+    //     var claims = new[]
+    //     {
+    //         new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
+    //         new Claim(ClaimTypes.Email, user.Email),
+    //         new Claim(ClaimTypes.Role, user.RoleID.ToString())
+    //     };
 
-//     var token = new JwtSecurityToken(
-//         issuer: "yourdomain.com",
-//         audience: "yourdomain.com",
-//         claims: claims,
-//         expires: DateTime.UtcNow.AddHours(2), // Token hết hạn sau 2 giờ
-//         signingCredentials: credentials
-//     );
+    //     var token = new JwtSecurityToken(
+    //         issuer: "yourdomain.com",
+    //         audience: "yourdomain.com",
+    //         claims: claims,
+    //         expires: DateTime.UtcNow.AddHours(2), // Token hết hạn sau 2 giờ
+    //         signingCredentials: credentials
+    //     );
 
-//     return new JwtSecurityTokenHandler().WriteToken(token);
-// }
+    //     return new JwtSecurityTokenHandler().WriteToken(token);
+    // }
 
 
     // [HttpPost("login")]
@@ -70,8 +70,8 @@ public class AuthController : ControllerBase
     [HttpGet("/hash-passwords")]
     public IActionResult HashPasswords()
     {
-        var users = _context.Users.ToList(); 
-        
+        var users = _context.Users.ToList();
+
         foreach (var user in users)
         {
             if (!user.PasswordHash.StartsWith("$2a$")) // Check if password isn't already hashed
@@ -80,7 +80,7 @@ public class AuthController : ControllerBase
             }
         }
 
-        _context.SaveChanges(); 
+        _context.SaveChanges();
 
         return Content("Mật khẩu đã được hash thành công!");
     }
@@ -102,7 +102,7 @@ public class AuthController : ControllerBase
         {
             return BadRequest(new { status = 400, message = "CCCD đã tồn tại! Vui lòng thử lại" });
         }
-        
+
         var user = new User
         {
             Email = model.Email,
@@ -119,6 +119,36 @@ public class AuthController : ControllerBase
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
         return Ok(new { status = 200, message = "Đăng ký thành công!" });
+    }
+
+    [HttpPost("/add-bank-account")]
+    public async Task<IActionResult> AddBankAccount([FromBody] BankAccountDTO model)
+    {
+        var user = await _context.Users.FindAsync(model.UserID);
+        if (user == null)
+        {
+            return NotFound(new { status = 404, message = "Người dùng không tồn tại." });
+        }
+
+        var bankAccount = new BankAccount
+        {
+            UserID = model.UserID,
+            BankID = model.BankID,
+            AccountNumber = model.AccountNumber,
+            Status = "active"
+        };
+
+        _context.BankAccounts.Add(bankAccount);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { status = 200, message = "Thêm tài khoản ngân hàng thành công!" });
+    }
+    public async Task<ActionResult<BankAccount>> CreateBankAccount(BankAccount bankAccount)
+    {
+        _context.BankAccounts.Add(bankAccount);
+        await _context.SaveChangesAsync();
+        return Ok(new { status = 200, message = "Thêm tài khoản ngân hàng thành công!" });
+        // return CreatedAtAction(nameof(GetBankAccount), new { id = bankAccount.AccountID }, bankAccount);
     }
 
     [HttpPost("/change-password")]

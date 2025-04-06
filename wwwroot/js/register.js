@@ -16,7 +16,7 @@ let createUser = (data, callback) => {
 };
 
 let handleRegister = () => {
-    // console.log("vào handleRegister");
+    console.log("vào handleRegister");                                                                               
     let email = document.querySelector('#email').value;
     let phoneNumber = document.querySelector('#phoneNumber').value;
     let cccd = document.querySelector('#cccd').value;
@@ -30,7 +30,7 @@ let handleRegister = () => {
         password: password,
         confirmPassword: confirm
     }
-    // console.log(data);
+    console.log(data);
     createUser(data, (result) => {
         let successAlert = document.getElementById("successAlert");
         let errorAlert = document.getElementById("errorAlert");
@@ -47,3 +47,4 @@ let handleRegister = () => {
         } else console.log("Error: " + result.message);
     });
 };
+

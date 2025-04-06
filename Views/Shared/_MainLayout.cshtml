@@ -43,7 +43,7 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li><a class="dropdown-item" href="/user/profile">Hồ sơ</a></li>
-                                        <li><a class="dropdown-item" href="#">Nạp tiền</a></li>
+                                        <li><a class="dropdown-item" href="#">Nạp tiền / Rút tiền</a></li>
                                         <li><a class="dropdown-item" href="#">Chuyển tiền</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
@@ -81,7 +81,7 @@
             fetch("http://localhost:5289/get-user-info")
                 .then(response => response.json())
                 .then(userData => {
-                    console.log(userData);
+                    @* console.log(userData); *@
                     document.querySelector("#name-profile").innerHTML = userData.fullName;
                 });
         });
